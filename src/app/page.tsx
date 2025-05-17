@@ -62,44 +62,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* <h1>Get your race pace or goal time</h1> */}
-        <h1>
-          **** next; add a calculate function that takes all the raw input and
-          is responsible for generating all the values we need *****
-        </h1>
+        <h1>Sit tight, this is going to be a great running pace calculator!</h1>
       </header>
-      <section>
-        <form>
-          <CalculationType onChange={setCalculationType} />
-          <RaceDistance onChange={setDistance} />
-          <Units onChange={setUnits} />
-          {calculationType === ECalculationTypes.PACE ? (
-            <GoalInput
-              hours={hours}
-              minutes={minutes}
-              seconds={seconds}
-              setHours={setHours}
-              setMinutes={setMinutes}
-              setSeconds={setSeconds}
-            />
-          ) : (
-            <PaceInput
-              paceInput={paceInput}
-              setPaceInput={setPaceInput}
-              units={units}
-            />
-          )}
-
-          <button type="button" onClick={handleSubmit}>
-            calculate
-          </button>
-        </form>
-      </section>
-      {results.length > 0 && (
-        <section className="paces">
-          <h2>Your Paces</h2>
-          <ResultsTable paces={results} />
-        </section>
-      )}
     </div>
   );
 }
