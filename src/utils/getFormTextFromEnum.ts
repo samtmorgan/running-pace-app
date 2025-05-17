@@ -18,7 +18,7 @@ export const getFormTextFromEnum = (
     | typeof EUnits
     | typeof ETimeInput
 ): TFormText[] => {
-  return Object.entries(enumObject).map(([key, value]) => ({
+  return Object.entries(enumObject).map(([, value]) => ({
     label: capitalizeFirstLetter(value),
     value,
   }));
