@@ -1,11 +1,15 @@
-import { TPace } from "@/utils/calculatePace";
 import styles from "./ResultsTable.module.css";
+import { TCalculationResult } from "@/utils";
 
 const TableHeader = ({ children }: { children: React.ReactNode }) => {
   return <th className={styles.tableHeader}>{children}</th>;
 };
 
-export const ResultsTable = ({ paces }: { paces: TPace[] }) => {
+export const ResultsTable = ({
+  results,
+}: {
+  results: TCalculationResult[];
+}) => {
   return (
     <table>
       <thead>
@@ -17,12 +21,12 @@ export const ResultsTable = ({ paces }: { paces: TPace[] }) => {
         </tr>
       </thead>
       <tbody>
-        {paces.map((pace, index) => (
+        {results.map((result, index) => (
           <tr key={index}>
-            <td>{pace.distance}</td>
-            <td>{`${pace.goal.hours}h ${pace.goal.minutes}m ${pace.goal.seconds}s`}</td>
-            <td>{pace.kmPace}</td>
-            <td>{pace.mPace}</td>
+            <td>{result.distance}</td>
+            <td>{result.goalString}</td>
+            <td>{result.kmPaceString}</td>
+            <td>{result.mPaceString}</td>
           </tr>
         ))}
       </tbody>

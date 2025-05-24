@@ -14,7 +14,7 @@ enum ERaceDistances {
 
 enum EUnits {
   KILOMETRES = "kilometres",
-  METERS = "miles",
+  MILES = "miles",
 }
 
 enum ETimeInput {

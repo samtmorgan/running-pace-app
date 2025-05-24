@@ -1,11 +1,11 @@
-import { useCallback } from "react";
-// import styles from "./PaceInput.module.css";
+import { useCallback, useMemo, useState } from "react";
 import {
   ETimeInput,
   ETimeInputPlaceholder,
-  EPaceLabels,
   EUnits,
+  defaultFormValues,
 } from "@/config";
+import { getFormTextFromEnum } from "@/utils";
 
 export type TPaceInput = {
   minutes: number;
@@ -16,14 +16,11 @@ export type TPaceInput = {
 type TPaceInputProps = {
   paceInput: TPaceInput;
   setPaceInput: (value: TPaceInput) => void;
-  units: EUnits;
 };
 
-export const PaceInput = ({
-  paceInput,
-  setPaceInput,
-  units,
-}: TPaceInputProps) => {
+export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
+  const [units, setUnits] = useState<EUnits>(defaultFormValues.units);
+
   const changeHandler = useCallback(
     (field: string, e: React.ChangeEvent<HTMLInputElement>) => {
       const value = Number(e.target.value);
@@ -50,16 +47,25 @@ export const PaceInput = ({
     [paceInput, setPaceInput, units]
   );
 
+  const unitFields = useMemo(() => getFormTextFromEnum(EUnits), []);
+
   return (
     <fieldset>
       <div>
-        <legend>
-          Pace (
-          {units === EUnits.KILOMETRES
-            ? EPaceLabels.KILOMETRES
-            : EPaceLabels.MILES}
-          ):
-        </legend>
+        <legend>Pace:</legend>
+        {unitFields.map((field) => (
+          <div key={field.value}>
+            <input
+              type="radio"
+              id={`calc-${field.value}`}
+              name="units"
+              value={field.value}
+              onChange={(e) => setUnits(e.target.value as EUnits)}
+              defaultChecked={field.value === defaultFormValues.units}
+            />
+            <label htmlFor={`calc-${field.value}`}>{field.label}</label>
+          </div>
+        ))}
         <div className="fields">
           {[
             {
