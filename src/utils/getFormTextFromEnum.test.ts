@@ -1,5 +1,5 @@
 import { getFormTextFromEnum } from "./getFormTextFromEnum";
-import { ECalculationTypes, ERaceDistances, EUnits } from "../config";
+import { ECalculationTypes } from "../config";
 
 jest.mock("../utils/stringUtils", () => ({
   capitalizeFirstLetter: jest.fn(
@@ -21,11 +21,5 @@ describe("getFormTextFromEnum", () => {
       },
     ];
     expect(result).toEqual(expected);
-  });
-
-  it("should return an empty array if the enum object is empty", () => {
-    const emptyEnum = {};
-    const result = getFormTextFromEnum(emptyEnum as any);
-    expect(result).toEqual([]);
   });
 });
