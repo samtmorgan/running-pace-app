@@ -47,7 +47,7 @@ export const GoalInput = ({ goalInput, setGoalInput }: TGoalInputProps) => {
   return (
     <fieldset>
       <div>
-        <legend>Goal time: </legend>
+        <legend>3. Enter goal time: </legend>
 
         <div className="fields">
           {[

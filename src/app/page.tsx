@@ -44,9 +44,9 @@ function App() {
   }, [calculationType, distance, goalInput, paceInput]);
 
   return (
-    <div className="App">
+    <div className="app">
       <header className="App-header">
-        <h1>Get your race pace or goal time</h1>
+        <h1>Get your pace or goal time</h1>
       </header>
       <section>
         <form>

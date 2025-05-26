@@ -48,24 +48,10 @@ export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
   );
 
   const unitFields = useMemo(() => getFormTextFromEnum(EUnits), []);
-
   return (
     <fieldset>
       <div>
-        <legend>Pace:</legend>
-        {unitFields.map((field) => (
-          <div key={field.value}>
-            <input
-              type="radio"
-              id={`calc-${field.value}`}
-              name="units"
-              value={field.value}
-              onChange={(e) => setUnits(e.target.value as EUnits)}
-              defaultChecked={field.value === defaultFormValues.units}
-            />
-            <label htmlFor={`calc-${field.value}`}>{field.label}</label>
-          </div>
-        ))}
+        <legend>3. Enter pace:</legend>
         <div className="fields">
           {[
             {
@@ -94,6 +80,23 @@ export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
                 placeholder={field.placeholder}
               />
             </div>
+          ))}
+        </div>
+        <div className="radio-pill-group">
+          {unitFields.map((field) => (
+            <span key={field.value}>
+              <input
+                type="radio"
+                id={`calc-${field.value}`}
+                name="units"
+                value={field.value}
+                onChange={(e) => setUnits(e.target.value as EUnits)}
+                defaultChecked={field.value === defaultFormValues.units}
+              />
+              <label className="pill" htmlFor={`calc-${field.value}`}>
+                {field.label}
+              </label>
+            </span>
           ))}
         </div>
       </div>
