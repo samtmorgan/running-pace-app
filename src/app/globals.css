@@ -1,12 +1,20 @@
 :root {
-  --background: #ffffff;
+  --background: #dfdfdf;
   --foreground: #171717;
+  --paper: #ffffff;
+  --primary: #3c91e6ff;
+  --primary-dark: #2a6bb0ff;
+  --yellow-green: #9fd356ff;
+  --foreground: rgb(55, 55, 55);
+  --background: #f1f1f1;
+  --accent: #fa824cff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: rgb(55, 55, 55);
+    --foreground: #f1f1f1;
+    --paper: rgb(75, 75, 75);
   }
 }
 
@@ -22,7 +30,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 1rem;
 }
 
 * {
@@ -31,10 +38,23 @@ body {
   margin: 0;
 }
 
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
 .app {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-items: center;
+}
+
+header {
+  background-color: var(--paper);
+  padding: 1rem;
+  width: 100%;
 }
 
 form {
@@ -43,49 +63,90 @@ form {
   gap: 1rem;
 }
 
+main {
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-color: var(--primary);
+  color: var(--background);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  transform: skew(var(--skew));
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+fieldset {
+  border: none;
+  background-color: var(--paper);
 }
 
-.label {
+fieldset p {
+  height: 2rem;
+  padding: 0.5rem;
+}
+
+table {
+  width: 100%;
+}
+
+/* ----------- */
+/* time input */
+.time-input-field label {
   display: none;
 }
 
-.input {
+.time-input-field input {
   width: 4rem;
+  border-radius: 0px;
+  border-style: solid;
+  height: 30px;
+  padding: 5px;
+  border-width: 1px;
+  background-color: var(--paper);
 }
 
-.inputContainer:not(:last-child)::after {
+.time-input-field:not(:last-child)::after {
   content: ":";
   margin: 0 0.2rem;
 }
 
-.fields {
+.time-input-group {
   display: flex;
   flex-direction: row;
+  padding: 10px 10px;
 }
 
-fieldset {
-  border: none;
+.pace-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
+/* ----------- */
 /* radio input */
 .radio-pill-group {
   border-radius: 25px; /* Rounded corners for the group */
   min-height: 50px;
   display: flex;
   align-items: flex-start; /* Changed from center to flex-start */
-  gap: 5px;
+  gap: 30px 10px;
   padding: 20px 10px;
   flex-wrap: wrap;
-  row-gap: 25px;
 }
 
 .radio-pill-group input[type="radio"] {
@@ -99,7 +160,6 @@ fieldset {
   cursor: pointer;
   background-color: #f0f0f0; /* Default background for unselected */
   color: #333;
-  border-radius: 20px; /* Rounded corners for individual pills */
   transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
 }
 
@@ -107,39 +167,49 @@ fieldset {
   margin-right: 0; /* Ensure no extra spacing on the last pill */
 }
 
-/* Style for the selected pill */
 .radio-pill-group input[type="radio"]:checked + label.pill {
-  background-color: #007bff; /* Highlight color for selected */
+  background-color: var(--primary); /* Highlight color for selected */
   color: white;
   font-weight: bold;
 }
 
-/* Hover effect */
 .radio-pill-group .pill:hover {
   background-color: #e0e0e0; /* Lighter hover background */
 }
 
 .radio-pill-group input[type="radio"]:checked + label.pill:hover {
-  background-color: #0056b3; /* Darker hover for selected */
+  background-color: var(--primary-dark); /* Darker hover for selected */
 }
 
-/* Focus effect for accessibility */
 .radio-pill-group .pill:focus {
-  outline: 2px solid #007bff;
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Optional: Add rounded corners for the first and last pills */
-.radio-pill-group .pill:first-of-type {
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+.paces {
+  background-color: var(--paper);
+  padding: 0.5rem;
 }
 
-.radio-pill-group .pill:last-of-type {
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+legend {
+  margin-bottom: 5px;
+  margin-left: 10px;
 }
 
-.radio-pill-group legend {
-  width: 120px;
+@media screen and (min-width: 700px) {
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    > * {
+      flex: 1;
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  main {
+    width: 1000px;
+  }
 }

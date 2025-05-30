@@ -46,10 +46,10 @@ export const GoalInput = ({ goalInput, setGoalInput }: TGoalInputProps) => {
   );
   return (
     <fieldset>
+      <p>Enter goal time: </p>
       <div>
-        <legend>3. Enter goal time: </legend>
-
-        <div className="fields">
+        {/* <legend>Enter goal time: </legend> */}
+        <div className="time-input-group">
           {[
             {
               value: goalInput[ETimeInput.HOURS],
@@ -67,12 +67,9 @@ export const GoalInput = ({ goalInput, setGoalInput }: TGoalInputProps) => {
               placeholder: ETimeInputPlaceholder.SECONDS,
             },
           ].map((field, index) => (
-            <div className="inputContainer" key={index}>
-              <label className="label" htmlFor={field.name}>
-                {field.name}
-              </label>
+            <div className="time-input-field" key={index}>
+              <label htmlFor={field.name}>{field.name}</label>
               <input
-                className="input"
                 value={field.value || ""}
                 onChange={(e) => changeHandler(field.name, e)}
                 id={field.name}
@@ -80,6 +77,17 @@ export const GoalInput = ({ goalInput, setGoalInput }: TGoalInputProps) => {
                 min={0}
                 step={1}
                 placeholder={field.placeholder}
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "e" ||
+                    e.key === "E" ||
+                    e.key === "+" ||
+                    e.key === "-" ||
+                    e.key === "."
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
               />
             </div>
           ))}

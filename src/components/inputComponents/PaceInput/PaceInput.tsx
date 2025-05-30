@@ -47,41 +47,20 @@ export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
     [paceInput, setPaceInput, units]
   );
 
-  const unitFields = useMemo(() => getFormTextFromEnum(EUnits), []);
+  const unitFields = useMemo(
+    () => [
+      { value: EUnits.KILOMETRES, label: "min/km" },
+      { value: EUnits.MILES, label: "min/mile" },
+    ],
+    []
+  );
+
   return (
     <fieldset>
+      <p>Enter pace</p>
       <div>
-        <legend>3. Enter pace:</legend>
-        <div className="fields">
-          {[
-            {
-              value: paceInput.minutes,
-              name: ETimeInput.MINUTES,
-              placeholder: ETimeInputPlaceholder.MINUTES,
-            },
-            {
-              value: paceInput.seconds,
-              name: ETimeInput.SECONDS,
-              placeholder: ETimeInputPlaceholder.SECONDS,
-            },
-          ].map((field, index) => (
-            <div className="inputContainer" key={index}>
-              <label className="label" htmlFor={field.name}>
-                {field.name}
-              </label>
-              <input
-                className="input"
-                value={field.value || ""}
-                onChange={(e) => changeHandler(field.name, e)}
-                id={field.name}
-                type="number"
-                min={0}
-                step={1}
-                placeholder={field.placeholder}
-              />
-            </div>
-          ))}
-        </div>
+        {/* <legend>Enter pace</legend> */}
+        {/* <div className="pace-input-container"> */}
         <div className="radio-pill-group">
           {unitFields.map((field) => (
             <span key={field.value}>
@@ -99,7 +78,46 @@ export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
             </span>
           ))}
         </div>
+        <div className="time-input-group">
+          {[
+            {
+              value: paceInput.minutes,
+              name: ETimeInput.MINUTES,
+              placeholder: ETimeInputPlaceholder.MINUTES,
+            },
+            {
+              value: paceInput.seconds,
+              name: ETimeInput.SECONDS,
+              placeholder: ETimeInputPlaceholder.SECONDS,
+            },
+          ].map((field, index) => (
+            <div className="time-input-field" key={index}>
+              <label htmlFor={field.name}>{field.name}</label>
+              <input
+                value={field.value || ""}
+                onChange={(e) => changeHandler(field.name, e)}
+                id={field.name}
+                type="number"
+                min={0}
+                step={1}
+                placeholder={field.placeholder}
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "e" ||
+                    e.key === "E" ||
+                    e.key === "+" ||
+                    e.key === "-" ||
+                    e.key === "."
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
+      {/* </div> */}
     </fieldset>
   );
 };

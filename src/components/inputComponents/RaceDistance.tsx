@@ -11,23 +11,26 @@ export const RaceDistance = ({ onChange }: TRaceDistanceProps) => {
 
   return (
     <fieldset>
-      <legend>1. Choose your race distance</legend>
-      <div className="radio-pill-group">
-        {fields.map((field) => (
-          <span key={field.value}>
-            <input
-              type="radio"
-              id={`race-${field.value}`}
-              name="race-distance"
-              value={field.value}
-              onChange={(e) => onChange(e.target.value as ERaceDistances)}
-              defaultChecked={field.value === defaultFormValues.raceDistance}
-            />
-            <label className="pill" htmlFor={`race-${field.value}`}>
-              {field.label}
-            </label>
-          </span>
-        ))}
+      <p>Choose your race distance</p>
+      <div>
+        {/* <legend>Choose your race distance</legend> */}
+        <div className="radio-pill-group">
+          {fields.map((field) => (
+            <span key={field.value}>
+              <input
+                type="radio"
+                id={`race-${field.value}`}
+                name="race-distance"
+                value={field.value}
+                onChange={(e) => onChange(e.target.value as ERaceDistances)}
+                defaultChecked={field.value === defaultFormValues.raceDistance}
+              />
+              <label className="pill" htmlFor={`race-${field.value}`}>
+                {field.label}
+              </label>
+            </span>
+          ))}
+        </div>
       </div>
     </fieldset>
   );

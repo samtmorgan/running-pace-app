@@ -11,23 +11,28 @@ export const CalculationType = ({ onChange }: TCalculationTypeProps) => {
 
   return (
     <fieldset>
-      <legend>2. Choose what to calculate</legend>
-      <div className="radio-pill-group">
-        {fields.map((field) => (
-          <span key={field.value}>
-            <input
-              type="radio"
-              id={`calc-${field.value}`}
-              name="calculation-type"
-              value={field.value}
-              onChange={(e) => onChange(e.target.value as ECalculationTypes)}
-              defaultChecked={field.value === defaultFormValues.calculationType}
-            />
-            <label className="pill" htmlFor={`calc-${field.value}`}>
-              {field.label}
-            </label>
-          </span>
-        ))}
+      {/* <legend>Choose what to calculate</legend> */}
+      <p>Choose what to calculate</p>
+      <div>
+        <div className="radio-pill-group">
+          {fields.map((field) => (
+            <span key={field.value}>
+              <input
+                type="radio"
+                id={`calc-${field.value}`}
+                name="calculation-type"
+                value={field.value}
+                onChange={(e) => onChange(e.target.value as ECalculationTypes)}
+                defaultChecked={
+                  field.value === defaultFormValues.calculationType
+                }
+              />
+              <label className="pill" htmlFor={`calc-${field.value}`}>
+                {field.label}
+              </label>
+            </span>
+          ))}
+        </div>
       </div>
     </fieldset>
   );

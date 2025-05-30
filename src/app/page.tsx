@@ -45,30 +45,32 @@ function App() {
 
   return (
     <div className="app">
-      <header className="App-header">
+      <header>
         <h1>Get your pace or goal time</h1>
       </header>
-      <section>
-        <form>
-          <RaceDistance onChange={setDistance} />
-          <CalculationType onChange={setCalculationType} />
-          {calculationType === ECalculationTypes.PACE ? (
-            <GoalInput goalInput={goalInput} setGoalInput={setGoalInput} />
-          ) : (
-            <PaceInput paceInput={paceInput} setPaceInput={setPaceInput} />
-          )}
+      <main>
+        <section>
+          <form>
+            <RaceDistance onChange={setDistance} />
+            <CalculationType onChange={setCalculationType} />
+            {calculationType === ECalculationTypes.PACE ? (
+              <GoalInput goalInput={goalInput} setGoalInput={setGoalInput} />
+            ) : (
+              <PaceInput paceInput={paceInput} setPaceInput={setPaceInput} />
+            )}
 
-          <button type="button" onClick={handleSubmit}>
-            calculate
-          </button>
-        </form>
-      </section>
-      {results.length > 0 && (
+            <button type="button" onClick={handleSubmit}>
+              <strong>Calculate</strong>
+            </button>
+          </form>
+        </section>
+        {/* {results.length > 0 && ( */}
         <section className="paces">
-          <h2>Your Paces</h2>
+          <h2>Calculation results</h2>
           <ResultsTable results={results} />
         </section>
-      )}
+        {/* )} */}
+      </main>
     </div>
   );
 }
