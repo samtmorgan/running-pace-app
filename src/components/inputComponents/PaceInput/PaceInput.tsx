@@ -5,7 +5,6 @@ import {
   EUnits,
   defaultFormValues,
 } from "@/config";
-import { getFormTextFromEnum } from "@/utils";
 
 export type TPaceInput = {
   minutes: number;
