@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { use, useCallback, useMemo, useState } from "react";
 import {
   CalculationType,
   RaceDistance,
@@ -43,6 +43,18 @@ function App() {
     }
   }, [calculationType, distance, goalInput, paceInput]);
 
+  const disableSubmit = useMemo(
+    () =>
+      (calculationType === ECalculationTypes.PACE &&
+        goalInput.hours === 0 &&
+        goalInput.minutes === 0 &&
+        goalInput.seconds === 0) ||
+      (calculationType === ECalculationTypes.GOAL &&
+        paceInput.minutes === 0 &&
+        paceInput.seconds === 0),
+    [calculationType, goalInput, paceInput]
+  );
+
   return (
     <div className="app">
       <header>
@@ -65,8 +77,8 @@ function App() {
               <PaceInput paceInput={paceInput} setPaceInput={setPaceInput} />
             )}
 
-            <button type="submit">
-              <strong>Calculate</strong>
+            <button disabled={disableSubmit} type="submit">
+              Calculate
             </button>
           </form>
         </section>
@@ -75,6 +87,14 @@ function App() {
           <div className="paces">
             <ResultsTable results={results} />
           </div>
+          <button
+            className="reset-button"
+            type="button"
+            onClick={() => setResults([])}
+            disabled={results.length === 0}
+          >
+            Clear Results
+          </button>
         </section>
       </main>
       <footer>

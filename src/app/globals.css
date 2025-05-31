@@ -4,6 +4,7 @@
   --paper: #ffffff;
   --primary: #3c91e6ff;
   --primary-dark: #2a6bb0ff;
+  --primary-disabled: rgb(150, 162, 174);
   --yellow-green: #9fd356ff;
   --foreground: rgb(55, 55, 55);
   --background: #f1f1f1;
@@ -69,6 +70,7 @@ main {
   flex-direction: column;
   width: 100%;
   flex: 1;
+  padding-top: 3rem;
 }
 
 footer {
@@ -97,10 +99,17 @@ button {
   cursor: pointer;
   font-size: 1rem;
   transform: skew(var(--skew));
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 button:hover {
   background-color: var(--primary-dark);
+}
+
+button:disabled {
+  background-color: var(--primary-disabled);
+  cursor: not-allowed;
 }
 
 a {
@@ -212,6 +221,11 @@ section h2 {
 .paces {
   background-color: var(--paper);
   padding: 0.5rem;
+}
+
+.reset-button {
+  width: 100%;
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 700px) {
