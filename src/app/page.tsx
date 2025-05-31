@@ -51,7 +51,12 @@ function App() {
       <main>
         <section>
           <h2>Calculate a pace or goal time</h2>
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
             <RaceDistance onChange={setDistance} />
             <CalculationType onChange={setCalculationType} />
             {calculationType === ECalculationTypes.PACE ? (
@@ -60,7 +65,7 @@ function App() {
               <PaceInput paceInput={paceInput} setPaceInput={setPaceInput} />
             )}
 
-            <button type="button" onClick={handleSubmit}>
+            <button type="submit">
               <strong>Calculate</strong>
             </button>
           </form>
@@ -72,6 +77,9 @@ function App() {
           </div>
         </section>
       </main>
+      <footer>
+        <p>&copy; {new Date().getFullYear()}, S T Morgan</p>
+      </footer>
     </div>
   );
 }

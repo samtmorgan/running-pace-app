@@ -48,9 +48,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Changed from center to flex-start */
+  justify-content: flex-start;
   height: 100vh;
-  padding-top: 4rem; /* Added padding to account for the fixed header */
+  padding-top: 4rem;
 }
 
 header {
@@ -59,7 +59,7 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 10; /* Ensures the header stays above other content */
+  z-index: 10;
 }
 
 main {
@@ -67,7 +67,19 @@ main {
   gap: 2rem;
   display: flex;
   flex-direction: column;
-  width: 100%; /* Ensures main content spans the full width */
+  width: 100%;
+  flex: 1;
+}
+
+footer {
+  background-color: var(--paper);
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+footer p {
+  font-size: 0.8rem;
 }
 
 form {
@@ -151,45 +163,45 @@ section h2 {
 /* ----------- */
 /* radio input */
 .radio-pill-group {
-  border-radius: 25px; /* Rounded corners for the group */
+  border-radius: 25px;
   min-height: 50px;
   display: flex;
-  align-items: flex-start; /* Changed from center to flex-start */
+  align-items: flex-start;
   gap: 30px 10px;
   padding: 20px 10px;
   flex-wrap: wrap;
 }
 
 .radio-pill-group input[type="radio"] {
-  display: none; /* Hides the actual radio button */
+  display: none;
 }
 
 .radio-pill-group .pill {
-  height: 40px; /* Fixed height for pills */
+  height: 40px;
   text-align: center;
   padding: 10px 15px;
   cursor: pointer;
-  background-color: #f0f0f0; /* Default background for unselected */
+  background-color: #f0f0f0;
   color: #333;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .radio-pill-group .pill:last-child {
-  margin-right: 0; /* Ensure no extra spacing on the last pill */
+  margin-right: 0;
 }
 
 .radio-pill-group input[type="radio"]:checked + label.pill {
-  background-color: var(--primary); /* Highlight color for selected */
+  background-color: var(--primary);
   color: white;
   font-weight: bold;
 }
 
 .radio-pill-group .pill:hover {
-  background-color: #e0e0e0; /* Lighter hover background */
+  background-color: #e0e0e0;
 }
 
 .radio-pill-group input[type="radio"]:checked + label.pill:hover {
-  background-color: var(--primary-dark); /* Darker hover for selected */
+  background-color: var(--primary-dark);
 }
 
 .radio-pill-group .pill:focus {

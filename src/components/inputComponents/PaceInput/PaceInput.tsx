@@ -114,7 +114,6 @@ export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
           ))}
         </div>
       </div>
-      {/* </div> */}
     </fieldset>
   );
 };
