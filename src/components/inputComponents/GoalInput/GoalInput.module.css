@@ -1,0 +1,17 @@
+.label {
+  display: none;
+}
+
+.input {
+  width: 4rem;
+}
+
+.inputContainer:not(:last-child)::after {
+  content: ":";
+  margin: 0 0.2rem;
+}
+
+.fields {
+  display: flex;
+  flex-direction: row;
+}

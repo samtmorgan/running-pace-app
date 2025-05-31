@@ -1,10 +1,9 @@
-import { useCallback } from "react";
-// import styles from "./PaceInput.module.css";
+import { useCallback, useMemo, useState } from "react";
 import {
   ETimeInput,
   ETimeInputPlaceholder,
-  EPaceLabels,
   EUnits,
+  defaultFormValues,
 } from "@/config";
 
 export type TPaceInput = {
@@ -16,14 +15,11 @@ export type TPaceInput = {
 type TPaceInputProps = {
   paceInput: TPaceInput;
   setPaceInput: (value: TPaceInput) => void;
-  units: EUnits;
 };
 
-export const PaceInput = ({
-  paceInput,
-  setPaceInput,
-  units,
-}: TPaceInputProps) => {
+export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
+  const [units, setUnits] = useState<EUnits>(defaultFormValues.units);
+
   const changeHandler = useCallback(
     (field: string, e: React.ChangeEvent<HTMLInputElement>) => {
       const value = Number(e.target.value);
@@ -50,17 +46,36 @@ export const PaceInput = ({
     [paceInput, setPaceInput, units]
   );
 
+  const unitFields = useMemo(
+    () => [
+      { value: EUnits.KILOMETRES, label: "min/km" },
+      { value: EUnits.MILES, label: "min/mile" },
+    ],
+    []
+  );
+
   return (
     <fieldset>
+      <p>Enter pace</p>
       <div>
-        <legend>
-          Pace (
-          {units === EUnits.KILOMETRES
-            ? EPaceLabels.KILOMETRES
-            : EPaceLabels.MILES}
-          ):
-        </legend>
-        <div className="fields">
+        <div className="radio-pill-group">
+          {unitFields.map((field) => (
+            <span key={field.value}>
+              <input
+                type="radio"
+                id={`calc-${field.value}`}
+                name="units"
+                value={field.value}
+                onChange={(e) => setUnits(e.target.value as EUnits)}
+                defaultChecked={field.value === defaultFormValues.units}
+              />
+              <label className="pill" htmlFor={`calc-${field.value}`}>
+                {field.label}
+              </label>
+            </span>
+          ))}
+        </div>
+        <div className="time-input-group">
           {[
             {
               value: paceInput.minutes,
@@ -73,12 +88,9 @@ export const PaceInput = ({
               placeholder: ETimeInputPlaceholder.SECONDS,
             },
           ].map((field, index) => (
-            <div className="inputContainer" key={index}>
-              <label className="label" htmlFor={field.name}>
-                {field.name}
-              </label>
+            <div className="time-input-field" key={index}>
+              <label htmlFor={field.name}>{field.name}</label>
               <input
-                className="input"
                 value={field.value || ""}
                 onChange={(e) => changeHandler(field.name, e)}
                 id={field.name}
@@ -86,6 +98,17 @@ export const PaceInput = ({
                 min={0}
                 step={1}
                 placeholder={field.placeholder}
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "e" ||
+                    e.key === "E" ||
+                    e.key === "+" ||
+                    e.key === "-" ||
+                    e.key === "."
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
               />
             </div>
           ))}

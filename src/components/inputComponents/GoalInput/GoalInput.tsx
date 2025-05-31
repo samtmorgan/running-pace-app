@@ -1,79 +1,74 @@
 import { useCallback } from "react";
 import { ETimeInput, ETimeInputPlaceholder } from "@/config";
 
-type TGoalInputProps = {
-  hours: number | null;
-  minutes: number | null;
-  seconds: number | null;
-  setHours: (value: number) => void;
-  setMinutes: (value: number) => void;
-  setSeconds: (value: number) => void;
+export type TGoalInput = {
+  hours: number;
+  minutes: number;
+  seconds: number;
 };
 
-export const GoalInput = ({
-  hours,
-  minutes,
-  seconds,
-  setHours,
-  setMinutes,
-  setSeconds,
-}: TGoalInputProps) => {
+type TGoalInputProps = {
+  goalInput: TGoalInput;
+  setGoalInput: (value: TGoalInput) => void;
+};
+
+export const GoalInput = ({ goalInput, setGoalInput }: TGoalInputProps) => {
   const changeHandler = useCallback(
     (field: string, e: React.ChangeEvent<HTMLInputElement>) => {
       const value = Number(e.target.value);
+      const updatedGoalInput: TGoalInput = { ...goalInput };
+
       switch (field) {
         case ETimeInput.HOURS:
-          setHours(value);
+          updatedGoalInput[ETimeInput.HOURS] = value;
           break;
         case ETimeInput.MINUTES:
           if (value > 59) {
-            setMinutes(59);
-            return;
+            updatedGoalInput[ETimeInput.MINUTES] = 59;
+          } else {
+            updatedGoalInput[ETimeInput.MINUTES] = value;
           }
-          setMinutes(value);
           break;
         case ETimeInput.SECONDS:
           if (value > 59) {
-            setSeconds(59);
-            return;
+            updatedGoalInput[ETimeInput.SECONDS] = 59;
+          } else {
+            updatedGoalInput[ETimeInput.SECONDS] = value;
           }
-          setSeconds(value);
           break;
         default:
           break;
       }
+
+      setGoalInput(updatedGoalInput);
     },
-    [setHours, setMinutes, setSeconds]
+    [goalInput, setGoalInput]
   );
   return (
     <fieldset>
+      <p>Enter goal time: </p>
       <div>
-        <legend>Goal time: </legend>
-
-        <div className="fields">
+        <div className="time-input-group">
           {[
             {
-              value: hours,
+              value: goalInput[ETimeInput.HOURS],
               name: ETimeInput.HOURS,
               placeholder: ETimeInputPlaceholder.HOURS,
             },
             {
-              value: minutes,
+              value: goalInput[ETimeInput.MINUTES],
               name: ETimeInput.MINUTES,
               placeholder: ETimeInputPlaceholder.MINUTES,
             },
             {
-              value: seconds,
+              value: goalInput[ETimeInput.SECONDS],
               name: ETimeInput.SECONDS,
               placeholder: ETimeInputPlaceholder.SECONDS,
             },
           ].map((field, index) => (
-            <div className="inputContainer" key={index}>
-              <label className="label" htmlFor={field.name}>
-                {field.name}
-              </label>
+            <div className="time-input-field" key={index}>
+              <label htmlFor={field.name}>{field.name}</label>
               <input
-                className="input"
                 value={field.value || ""}
                 onChange={(e) => changeHandler(field.name, e)}
                 id={field.name}
@@ -81,6 +76,17 @@ export const GoalInput = ({
                 min={0}
                 step={1}
                 placeholder={field.placeholder}
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "e" ||
+                    e.key === "E" ||
+                    e.key === "+" ||
+                    e.key === "-" ||
+                    e.key === "."
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
               />
             </div>
           ))}
