@@ -48,7 +48,6 @@ export const GoalInput = ({ goalInput, setGoalInput }: TGoalInputProps) => {
     <fieldset>
       <p>Enter goal time: </p>
       <div>
-        {/* <legend>Enter goal time: </legend> */}
         <div className="time-input-group">
           {[
             {

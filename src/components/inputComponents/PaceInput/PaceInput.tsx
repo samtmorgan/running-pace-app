@@ -58,8 +58,6 @@ export const PaceInput = ({ paceInput, setPaceInput }: TPaceInputProps) => {
     <fieldset>
       <p>Enter pace</p>
       <div>
-        {/* <legend>Enter pace</legend> */}
-        {/* <div className="pace-input-container"> */}
         <div className="radio-pill-group">
           {unitFields.map((field) => (
             <span key={field.value}>

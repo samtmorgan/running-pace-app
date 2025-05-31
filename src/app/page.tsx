@@ -47,9 +47,7 @@ function App() {
     <div className="app">
       <header>
         <h1>Pace a Run</h1>
-        {/* <h1>Calculate a pace or goal time</h1> */}
       </header>
-      {/* <div className="app"> */}
       <main>
         <section>
           <h2>Calculate a pace or goal time</h2>
@@ -67,17 +65,14 @@ function App() {
             </button>
           </form>
         </section>
-        {/* {results.length > 0 && ( */}
         <section>
           <h2>Calculation results</h2>
           <div className="paces">
             <ResultsTable results={results} />
           </div>
         </section>
-        {/* )} */}
       </main>
     </div>
-    // </div>
   );
 }
 

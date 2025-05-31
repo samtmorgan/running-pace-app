@@ -13,7 +13,6 @@ export const RaceDistance = ({ onChange }: TRaceDistanceProps) => {
     <fieldset>
       <p>Choose your race distance</p>
       <div>
-        {/* <legend>Choose your race distance</legend> */}
         <div className="radio-pill-group">
           {fields.map((field) => (
             <span key={field.value}>

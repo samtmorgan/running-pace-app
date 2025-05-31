@@ -11,7 +11,6 @@ export const CalculationType = ({ onChange }: TCalculationTypeProps) => {
 
   return (
     <fieldset>
-      {/* <legend>Choose what to calculate</legend> */}
       <p>Choose what to calculate</p>
       <div>
         <div className="radio-pill-group">
