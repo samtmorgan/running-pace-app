@@ -46,10 +46,13 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Get your pace or goal time</h1>
+        <h1>Pace a Run</h1>
+        {/* <h1>Calculate a pace or goal time</h1> */}
       </header>
+      {/* <div className="app"> */}
       <main>
         <section>
+          <h2>Calculate a pace or goal time</h2>
           <form>
             <RaceDistance onChange={setDistance} />
             <CalculationType onChange={setCalculationType} />
@@ -65,13 +68,16 @@ function App() {
           </form>
         </section>
         {/* {results.length > 0 && ( */}
-        <section className="paces">
+        <section>
           <h2>Calculation results</h2>
-          <ResultsTable results={results} />
+          <div className="paces">
+            <ResultsTable results={results} />
+          </div>
         </section>
         {/* )} */}
       </main>
     </div>
+    // </div>
   );
 }
 
