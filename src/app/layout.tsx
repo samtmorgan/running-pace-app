@@ -37,7 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <meta name="viewport" content="width=device-width, initial-scale=1 " />
-
+      <link
+        rel="apple-touch-icon"
+        href="/apple-touch-icon.png"
+        sizes="180x180"
+      ></link>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
