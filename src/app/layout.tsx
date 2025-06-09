@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pace a Run",
+  title: "Pace a Run – Free Running Pace & Goal Time Calculator for Runners",
   keywords: [
     "pace calculator",
     "running pace",
@@ -25,8 +25,12 @@ export const metadata: Metadata = {
     "running pace goal",
     "running pace calculator app",
     "running goal calculator",
+    "marathon pace calculator",
+    "race pace calculator",
+    "personal best running calculator",
   ],
-  description: "Calculate your running pace or goal time",
+  description:
+    "Easily calculate your running pace or goal time with Pace a Run. Perfect for runners training for races, marathons, or improving their personal best. Try our free, easy-to-use running pace calculator app!",
 };
 
 export default function RootLayout({
