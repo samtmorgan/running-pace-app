@@ -41,6 +41,15 @@ function App() {
     if (result) {
       setResults((prev) => [...prev, result]);
     }
+    if (
+      typeof window !== "undefined" &&
+      typeof window.sa_event === "function"
+    ) {
+      window.sa_event("calculate", {
+        calculationType,
+        distance,
+      });
+    }
   }, [calculationType, distance, goalInput, paceInput]);
 
   const disableSubmit = useMemo(
@@ -90,7 +99,10 @@ function App() {
           <button
             className="reset-button"
             type="button"
-            onClick={() => setResults([])}
+            onClick={() => {
+              setResults([]);
+              window.sa_event?.("clear_results");
+            }}
             disabled={results.length === 0}
           >
             Clear Results
