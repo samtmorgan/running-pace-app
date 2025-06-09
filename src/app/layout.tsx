@@ -46,6 +46,7 @@ export default function RootLayout({
         href="/apple-touch-icon.png"
         sizes="180x180"
       />
+      <link rel="canonical" href="https://www.pacearun.com/" />
       {/* Open Graph Meta Tags */}
       <meta
         property="og:title"
