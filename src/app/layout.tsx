@@ -47,6 +47,7 @@ export default function RootLayout({
         sizes="180x180"
       />
       <link rel="canonical" href="https://www.pacearun.com/" />
+      <link rel="manifest" href="/manifest.webmanifest" />
       {/* Open Graph Meta Tags */}
       <meta
         property="og:title"
