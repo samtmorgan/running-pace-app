@@ -107,6 +107,10 @@ export default function RootLayout({
       />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <script
+          async
+          src="https://scripts.simpleanalyticscdn.com/latest.js"
+        ></script>
       </body>
     </html>
   );
