@@ -45,7 +45,30 @@ export default function RootLayout({
         rel="apple-touch-icon"
         href="/apple-touch-icon.png"
         sizes="180x180"
-      ></link>
+      />
+      {/* Open Graph Meta Tags */}
+      <meta
+        property="og:title"
+        content="Pace a Run – Free Running Pace & Goal Time Calculator for Runners"
+      />
+      <meta
+        property="og:description"
+        content="Easily calculate your running pace or goal time with Pace a Run. Perfect for runners training for races, marathons, or improving their personal best. Try our free, easy-to-use running pace calculator app!"
+      />
+      <meta property="og:image" content="/android-chrome-512x512.png" />
+      <meta property="og:url" content="https://www.pacearun.com/" />
+      <meta property="og:type" content="website" />
+      {/* Twitter Card Meta Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content="Pace a Run – Free Running Pace & Goal Time Calculator for Runners"
+      />
+      <meta
+        name="twitter:description"
+        content="Easily calculate your running pace or goal time with Pace a Run. Perfect for runners training for races, marathons, or improving their personal best. Try our free, easy-to-use running pace calculator app!"
+      />
+      <meta name="twitter:image" content="/android-chrome-512x512.png" />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
