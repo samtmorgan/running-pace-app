@@ -70,6 +70,22 @@ export default function RootLayout({
         content="Easily calculate your running pace or goal time with Pace a Run. Perfect for runners training for races, marathons, or improving their personal best. Try our free, easy-to-use running pace calculator app!"
       />
       <meta name="twitter:image" content="/android-chrome-512x512.png" />
+      <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Pace a Run",
+            "url": "https://www.pacearun.com/",
+            "description": "Easily calculate your running pace or goal time with Pace a Run. Perfect for runners training for races, marathons, or improving their personal best. Try our free, easy-to-use running pace calculator app!",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.pacearun.com/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        `}
+      </script>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
