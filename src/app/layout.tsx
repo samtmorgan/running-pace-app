@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,7 +72,11 @@ export default function RootLayout({
         content="Easily calculate your running pace or goal time with Pace a Run. Perfect for runners training for races, marathons, or improving their personal best. Try our free, easy-to-use running pace calculator app!"
       />
       <meta name="twitter:image" content="/android-chrome-512x512.png" />
-      <script type="application/ld+json">
+      <Script
+        id="ld-json-schema"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {`
           {
             "@context": "https://schema.org",
@@ -86,7 +91,7 @@ export default function RootLayout({
             }
           }
         `}
-      </script>
+      </Script>
       <link rel="icon" href="/favicon.ico" />
       <link
         rel="icon"
