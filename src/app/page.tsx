@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   CalculationType,
   RaceDistance,
@@ -15,6 +15,7 @@ import { getResult, TCalculationResult } from "@/utils";
 
 function App() {
   const [results, setResults] = useState<TCalculationResult[]>([]);
+  const resultsSectionRef = useRef<HTMLElement | null>(null);
   const [calculationType, setCalculationType] = useState<ECalculationTypes>(
     ECalculationTypes.PACE
   );
@@ -35,11 +36,17 @@ function App() {
       paceInput,
       goalInput,
     });
-    console.log("result", result);
     setGoalInput(defaultFormValues.goalInput);
     setPaceInput(defaultFormValues.paceInput);
     if (result) {
-      setResults((prev) => [...prev, result]);
+      setResults((prevResults) => {
+        const newResults = [...prevResults, result];
+        // Scroll after state update
+        setTimeout(() => {
+          resultsSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 0);
+        return newResults;
+      });
     }
     window.sa_event("calculate", {
       calculationType,
@@ -86,23 +93,25 @@ function App() {
             </button>
           </form>
         </section>
-        <section>
-          <h2>Calculation results</h2>
-          <div className="paces">
-            <ResultsTable results={results} />
-          </div>
-          <button
-            className="reset-button"
-            type="button"
-            onClick={() => {
-              setResults([]);
-              window.sa_event("clear_results");
-            }}
-            disabled={results.length === 0}
-          >
-            Clear Results
-          </button>
-        </section>
+        {results.length > 0 && (
+          <section ref={resultsSectionRef}>
+            <h2>Calculation results</h2>
+            <div className="paces">
+              <ResultsTable results={results} />
+            </div>
+            <button
+              className="reset-button"
+              type="button"
+              onClick={() => {
+                setResults([]);
+                window.sa_event("clear_results");
+              }}
+              disabled={results.length === 0}
+            >
+              Clear Results
+            </button>
+          </section>
+        )}
       </main>
       <footer>
         <p>&copy; {new Date().getFullYear()}, S T Morgan</p>

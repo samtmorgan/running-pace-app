@@ -1,21 +1,22 @@
 :root {
-  --background: #dfdfdf;
-  --foreground: #171717;
-  --paper: #ffffff;
-  --primary: #3c91e6ff;
-  --primary-dark: #2a6bb0ff;
-  --primary-disabled: rgb(150, 162, 174);
-  --yellow-green: #9fd356ff;
-  --foreground: rgb(55, 55, 55);
-  --background: #f1f1f1;
-  --accent: #fa824cff;
+  --background: coral;
+  --primary: #404040;
+  --secondary: #f0f0f0;
+  --button-disabled: #454343;
+  --text: var(--primary);
+  --text-contrast: var(--primary);
+  --text-selected-radio: var(--secondary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: rgb(55, 55, 55);
-    --foreground: #f1f1f1;
-    --paper: rgb(75, 75, 75);
+    --background: #2c2c2c;
+    --primary: coral;
+    --secondary: rgb(253, 205, 188);
+    --button-disabled: rgb(187, 94, 60);
+    --text: var(--background);
+    --text-contrast: #2c2c2c;
+    --text-selected-radio: #2c2c2c;
   }
 }
 
@@ -26,7 +27,7 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--primary);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,12 +56,18 @@ body {
 }
 
 header {
-  background-color: var(--paper);
+  background-color: var(--background);
   padding: 1rem;
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-decoration: underline;
+  text-decoration-style: wavy;
 }
 
 main {
@@ -68,13 +75,12 @@ main {
   gap: 2rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 500px;
   flex: 1;
   padding-top: 3rem;
 }
 
 footer {
-  background-color: var(--paper);
   padding: 1rem;
   width: 100%;
   text-align: center;
@@ -101,14 +107,15 @@ button {
   transform: skew(var(--skew));
   text-transform: uppercase;
   font-weight: bold;
+  border: 1px solid var(--background);
 }
 
-button:hover {
-  background-color: var(--primary-dark);
+button:hover:not(:disabled) {
+  border: 1px solid var(--primary);
 }
 
 button:disabled {
-  background-color: var(--primary-disabled);
+  background-color: var(--button-disabled);
   cursor: not-allowed;
 }
 
@@ -119,7 +126,6 @@ a {
 
 fieldset {
   border: none;
-  background-color: var(--paper);
 }
 
 fieldset p {
@@ -129,6 +135,12 @@ fieldset p {
 }
 
 table {
+  width: 100%;
+}
+
+section {
+  border: 1px solid var(--primary);
+  padding: 1rem;
   width: 100%;
 }
 
@@ -152,13 +164,17 @@ section h2 {
 
 .time-input-field input {
   width: 4rem;
-  border-radius: 0px;
-  border-style: solid;
+  /* border: 1px solid var(--primary); */
+  border: none;
   height: 30px;
   padding: 5px;
-  border-width: 1px;
-  background-color: var(--paper);
+  background-color: var(--secondary);
   font-size: 16px;
+  color: var(--text);
+}
+
+.time-input-field input::placeholder {
+  color: var(--text);
 }
 
 .time-input-field:not(:last-child)::after {
@@ -199,36 +215,31 @@ section h2 {
   text-align: center;
   padding: 10px 15px;
   cursor: pointer;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--secondary);
+  color: var(--text-contrast);
+  border: 2px solid var(--background);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.radio-pill-group .pill:hover {
+  border: 2px solid var(--primary);
+}
+
+.radio-pill-group input[type="radio"]:checked + label.pill {
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+  color: var(--text-selected-radio);
+}
+
+.radio-pill-group .pill:focus {
+  outline: 2px solid var(--primary);
 }
 
 .radio-pill-group .pill:last-child {
   margin-right: 0;
 }
 
-.radio-pill-group input[type="radio"]:checked + label.pill {
-  background-color: var(--primary);
-  color: white;
-  font-weight: bold;
-}
-
-.radio-pill-group .pill:hover {
-  background-color: #e0e0e0;
-}
-
-.radio-pill-group input[type="radio"]:checked + label.pill:hover {
-  background-color: var(--primary-dark);
-}
-
-.radio-pill-group .pill:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
 .paces {
-  background-color: var(--paper);
   padding: 0.5rem;
 }
 
@@ -240,19 +251,15 @@ section h2 {
 @media screen and (min-width: 700px) {
   main {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
     padding-top: 6rem;
     align-items: flex-start;
-    > * {
-      flex: 1;
-    }
   }
 }
 
 @media screen and (min-width: 1000px) {
   main {
-    width: 1000px;
+    width: 500px;
   }
 }
